@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ .Release.Name }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
