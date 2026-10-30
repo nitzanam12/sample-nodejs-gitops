@@ -16,5 +16,4 @@ resources:
   limits:
     memory: 256Mi
 
-ingress:
-  enabled: false
+
