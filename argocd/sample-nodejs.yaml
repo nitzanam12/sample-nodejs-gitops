@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: sample-nodejs
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/nitzanam12/sample-nodejs-gitops.git
+    targetRevision: main
+    path: helm/sample-nodejs
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sample-nodejs
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
