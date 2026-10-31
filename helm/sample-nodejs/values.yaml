@@ -1,6 +1,6 @@
 image:
   repository: 848349338166.dkr.ecr.eu-north-1.amazonaws.com/sample-nodejs
-  tag: "190d14dc227b2535ff965af0dbcce679e14023ec"
+  tag: "2ca414c406073b099f988608d152e4274a0e2046"
   pullPolicy: IfNotPresent
 
 service:
