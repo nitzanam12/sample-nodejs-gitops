@@ -15,7 +15,9 @@ Application repository: https://github.com/nitzanam12/sample-nodejs
         service.yaml
         ingress.yaml
 
-The chart deploys two application replicas with readiness and liveness probes, resource requests, a ClusterIP Service, and an ALB Ingress. HTTPS uses an ACM certificate, with HTTP redirected to HTTPS. Only /my-app and /about are public routes.
+The Helm chart deploys the application with readiness and liveness probes, resource limits, a ClusterIP Service, and an ALB Ingress. An HPA scales the application between 2 and 4 replicas based on CPU utilization. Rolling updates use maxSurge: 1 and maxUnavailable: 0.
+
+HTTPS uses an ACM certificate, with HTTP redirected to HTTPS. Only /my-app and /about are publicly accessible.
 
 ## Deployment flow
 

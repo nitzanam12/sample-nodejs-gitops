@@ -1,5 +1,3 @@
-replicaCount: 2
-
 image:
   repository: 848349338166.dkr.ecr.eu-north-1.amazonaws.com/sample-nodejs
   tag: "190d14dc227b2535ff965af0dbcce679e14023ec"
@@ -19,3 +17,8 @@ resources:
 ingress:
   host: app.nitzan-assignment.com
   certificateArn: arn:aws:acm:eu-north-1:848349338166:certificate/dd995268-e615-4d63-bfae-f54dfac3e3fa
+
+autoscaling:
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 70
