@@ -16,4 +16,6 @@ resources:
   limits:
     memory: 256Mi
 
-
+ingress:
+  host: app.nitzan-assignment.com
+  certificateArn: arn:aws:acm:eu-north-1:848349338166:certificate/dd995268-e615-4d63-bfae-f54dfac3e3fa
