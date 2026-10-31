@@ -18,8 +18,16 @@ spec:
     - host: {{ .Values.ingress.host | quote }}
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /my-app
+            pathType: Exact
+            backend:
+              service:
+                name: {{ .Release.Name }}
+                port:
+                  name: web
+
+          - path: /about
+            pathType: Exact
             backend:
               service:
                 name: {{ .Release.Name }}
